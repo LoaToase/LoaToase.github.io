@@ -457,6 +457,67 @@
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script>
     let url="http://124.70.108.229:8080" //http://124.70.108.229:8080/goods/list
+    class Axios{
+        // xhr =  null
+        url = "http://124.70.108.229:8080"
+        api = ""
+        constructor(api){
+            this.api = api
+            
+            console.log(this.api);
+            
+        }
+        get(callfun){
+            console.log(arguments);
+            console.log(callfun);
+
+            if(arguments.length == 1){
+                let xhr = new XMLHttpRequest();
+                xhr.open('get', this.url+this.api);
+                xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+                xhr.send();
+                xhr.onload = function() {
+                    callfun(JSON.parse(xhr.response))
+                }
+            }else{
+                let ss = this.buildPar(arguments[1])
+                console.log(ss);
+                let xhr = new XMLHttpRequest();
+                xhr.open('get', this.url+this.api+ss);
+                xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+                xhr.send();
+                xhr.onload = function() {
+                    callfun(JSON.parse(xhr.response))
+                }
+            }
+        }
+        post(callfun,req){
+            
+            let ss = this.buildPar(req)
+            console.log(ss);
+            let xhr = new XMLHttpRequest();
+            xhr.open('post', this.url+this.api+ss);
+            xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+            xhr.send(null);
+            xhr.onload = function() {
+                callfun(JSON.parse(xhr.response))
+            }
+        }
+        
+        buildPar(obj){
+            let s = "?"
+            for(let k in obj){
+                if(obj.hasOwnProperty(k)){
+                    console.log(k);
+                    console.log(obj[k]);
+                    s+=k+"="
+                    s+=obj[k]+"&"
+                }
+            }
+            return s
+        }
+    }
+    
     new Vue({
       el: '#app',
       data: function() {
@@ -482,20 +543,30 @@
           },
           changedate:(date)=>{
             console.log(date);
-            axios.get(url+"/schedule/gettheday",{params:{value:date}})
-              .then((res)=>{
-                // console.log(res.data);
-                this.searchList = res.data.data
-              })
+            new Axios("/schedule/gettheday").get((data)=>{
+                    console.log(data);
+                    this.searchList = data.data
+                  
+              },{value:date})
+            // axios.get(url+"/schedule/gettheday",{params:{value:date}})
+            //   .then((res)=>{
+            //     // console.log(res.data);
+            //     this.searchList = res.data.data
+            //   })
             
           },
           changehisSwi:(x)=>{
             console.log(x);
-            axios.get(url+"/schedule/change",{params:{id:x.id,status:x.isfinished}})
-              .then((res)=>{
-                console.log(res.data);
+            new Axios("/schedule/change").get((data)=>{
+                    console.log(data);
+                    
+                  
+              },{id:x.id,status:x.isfinished})
+            // axios.get(url+"/schedule/change",{params:{id:x.id,status:x.isfinished}})
+            //   .then((res)=>{
+            //     console.log(res.data);
                 
-              })
+            //   })
               this.updatejdtotal(x)
           },
           changeswi:(i,v,n)=>{
@@ -504,32 +575,47 @@
               // console.log("lj");
               let x = this.ljList[i]
               // console.log(x);
-              axios.get(url+"/schedule/change",{params:{id:x.id,status:v}})
-              .then((res)=>{
-                console.log(res.data);
+              new Axios("/schedule/change").get((data)=>{
+                    console.log(data);
+                    
+                  
+              },{id:x.id,status:v})
+              // axios.get(url+"/schedule/change",{params:{id:x.id,status:v}})
+              // .then((res)=>{
+              //   console.log(res.data);
                 
-              })
+              // })
               this.updatejdtotal(x)
               
             }else if(n=="yy"){
               // console.log("yy");
               let x = this.yyList[i]
-              axios.get(url+"/schedule/change",{params:{id:x.id,status:v}})
-              .then((res)=>{
-                console.log(res.data);
+              new Axios("/schedule/change").get((data)=>{
+                    console.log(data);
+                    
+                  
+              },{id:x.id,status:v})
+              // axios.get(url+"/schedule/change",{params:{id:x.id,status:v}})
+              // .then((res)=>{
+              //   console.log(res.data);
                 
-              })
+              // })
               this.updatejdtotal(x)
               
 
             }else if(n == "zw"){
               // console.log("zw");
               let x = this.zwList[i]
-              axios.get(url+"/schedule/change",{params:{id:x.id,status:v}})
-              .then((res)=>{
-                console.log(res.data);
+              new Axios("/schedule/change").get((data)=>{
+                    console.log(data);
+                    
+                  
+              },{id:x.id,status:v})
+              // axios.get(url+"/schedule/change",{params:{id:x.id,status:v}})
+              // .then((res)=>{
+              //   console.log(res.data);
                 
-              })
+              // })
               this.updatejdtotal(x)
 
             }
@@ -594,13 +680,11 @@
       mounted:function(){
         console.log(url);
         console.log(this.activeName);
-        
-        axios.get(url+"/schedule/gettoday")
-            .then(response => {
-              console.log(response.data);
-              this.searchList = response.data.data
-              if(response.data.code == 1){
-                response.data.data.forEach(element => {
+        new Axios("/schedule/gettoday").get((data)=>{
+          console.log(data);
+              this.searchList = data.data
+              if(data.code == 1){
+                data.data.forEach(element => {
                   if(element.name == "lj"){
                     this.ljList.push(element)
                   }else if(element.name == "yy"){
@@ -612,38 +696,76 @@
                     this.todayjd += 1
                   }
                 });
-                this.todayjdnum = response.data.data.length
-                // console.log(this.todayjd);
+                this.todayjdnum = data.data.length}
+        
+    })
+        // axios.get(url+"/schedule/gettoday")
+        //     .then(response => {
+        //       console.log(response.data);
+        //       this.searchList = response.data.data
+        //       if(response.data.code == 1){
+        //         response.data.data.forEach(element => {
+        //           if(element.name == "lj"){
+        //             this.ljList.push(element)
+        //           }else if(element.name == "yy"){
+        //             this.yyList.push(element)
+        //           }else{
+        //             this.zwList.push(element)
+        //           }
+        //           if(element.isfinished){
+        //             this.todayjd += 1
+        //           }
+        //         });
+        //         this.todayjdnum = response.data.data.length
+        //         // console.log(this.todayjd);
                 
 
-              }
-              // console.log(this.ljList);
-              // console.log(this.yyList);
-              // console.log(this.zwList);
+        //       }
+        //       // console.log(this.ljList);
+        //       // console.log(this.yyList);
+        //       // console.log(this.zwList);
               
-            })
-            .catch(error => {
-              console.error(error);
-            });
-        axios.get(url+"/schedule/getuntask")
-        .then((res)=>{
-          // console.log(res.data);
-          if(res.data.code){
-            res.data.data.forEach(e=>{
+        //     })
+        //     .catch(error => {
+        //       console.error(error);
+        //     });
+        new Axios("/schedule/getuntask").get((data)=>{
+          // console.log(data);
+          if(data.code){
+            data.data.forEach(e=>{
               this.unList.push(e)
             })
           }
-          // console.log(this.unList);
+        
+    })
+        // axios.get(url+"/schedule/getuntask")
+        // .then((res)=>{
+        //   // console.log(res.data);
+        //   if(res.data.code){
+        //     res.data.data.forEach(e=>{
+        //       this.unList.push(e)
+        //     })
+        //   }
+        //   // console.log(this.unList);
           
-        })
-        axios.get(url+"/schedule/totalday")
-        .then((res)=>{
-          if(res.data.code){
-            console.log(res.data.data);
-            this.finishedday = res.data.data
-            this.finisheddaycc = res.data.data
+        // })
+        new Axios("/schedule/totalday").get((data)=>{
+          // console.log(data);
+          if(data.code){
+            console.log(data.data);
+            this.finishedday = data.data
+            this.finisheddaycc = data.data
           }
-        })
+        
+    })
+        // axios.get(url+"/schedule/totalday")
+        // .then((res)=>{
+        //   if(res.data.code){
+        //     console.log(res.data.data);
+        //     this.finishedday = res.data.data
+        //     this.finisheddaycc = res.data.data
+        //   }
+        // })
         
       }
     })
