@@ -1,31 +1,651 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
-
+<html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="icon" href="/favicon.ico">
-    <title>wlx_blog</title>
-    <link href="./css/about.50eed9b1.css" rel="prefetch">
-    <link href="./css/chunk-55197bc4.e3169a32.css" rel="prefetch">
-    <link href="./css/chunk-ab1a9aa4.e2945549.css" rel="prefetch">
-    <link href="./js/about.fb8afb5d.js" rel="prefetch">
-    <link href="./js/chunk-2d22cab2.0981f31f.js" rel="prefetch">
-    <link href="./js/chunk-55197bc4.113072a2.js" rel="prefetch">
-    <link href="./js/chunk-ab1a9aa4.dabdcbcb.js" rel="prefetch">
-    <link href="./css/app.cf73efb4.css" rel="preload" as="style">
-    <link href="./css/chunk-vendors.53681ea5.css" rel="preload" as="style">
-    <link href="./js/app.f62966a0.js" rel="preload" as="script">
-    <link href="./js/chunk-vendors.e1e68b37.js" rel="preload" as="script">
-    <link href="./css/chunk-vendors.53681ea5.css" rel="stylesheet">
-    <link href="./css/app.cf73efb4.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <!-- import CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <title>学习日志记录</title>
 </head>
+<style>
+  ::-webkit-scrollbar {
+  width: 0.35rem;
+  height: 0.25rem;
+  background-image: linear-gradient(135deg, pink 0%, rgb(255, 225, 231) 72%, rgba(247, 215, 220, 0.3) 100%);
+}
+  body{
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+  #app{
+    overflow-y: scroll;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url("imgs/01.jpg") center;
+    background-size: contain;
+    background-attachment: fixed;
+  }
+  .topnav{
+    position: relative;
+    top: 20px;
+    margin: 0px auto;
+    width: 220px;
+    height: 50px;
+    /* background-color: pink; */
+    border-radius: 25px;
+    /* box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1); */
 
-<body><noscript><strong>请在浏览器设置中打开JS脚本语言</strong></noscript>
-    <div id="app"></div>
-    <script src="./js/chunk-vendors.e1e68b37.js"></script>
-    <script src="./js/app.f62966a0.js"></script>
+  }
+  .mianNav{
+    font-size: 40px;
+    text-align: center;
+    line-height: 50px;
+    margin: 0 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    color: rgb(248, 165, 179);
+    background-color: white;
+    box-shadow: 9px 9px 15px rgba(0, 0, 0, 0.2),
+                -9px -9px 15px rgba(255, 255, 255, 1);
+    transition: all .2s ease-out;
+    background-color: #efeeee;
+
+    /* background-color: aqua; */
+  }
+  .mianNav:hover{
+    cursor: pointer;
+    color: pink;
+    /* background-color: aliceblue; */
+    box-shadow: 9px 9px 15px rgba(0, 0, 0, 0.2),
+                -9px -9px 15px rgba(255, 255, 255, 1);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.2),
+    0 0 0 rgba(255, 255, 255, 0.8),
+    inset 9px 9px 15px rgba(0, 0, 0, 0.1),
+    inset -9px -9px 15px rgba(255, 255, 255, 1);
+    transition: all .2s ease-out;
+    background-color: #efeeee;
+
+    
+    /* font-size: 39px; */
+  }
+  .chosNav{
+    font-size: 40px;
+    text-align: center;
+    line-height: 50px;
+    margin: 0 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    color: rgb(248, 165, 179);
+
+    background-color: white;
+    box-shadow: 9px 9px 15px rgba(0, 0, 0, 0.2),
+                -9px -9px 15px rgba(255, 255, 255, 1);
+    transition: all .2s ease-out;
+    background-color: #efeeee;
+
+    /* background-color: aqua; */
+  }
+  .chosNav:hover{
+    cursor: pointer;
+    /* background-color: aliceblue; */
+    box-shadow: 9px 9px 15px rgba(0, 0, 0, 0.2),
+                -9px -9px 15px rgba(255, 255, 255, 1);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.2),
+    0 0 0 rgba(255, 255, 255, 0.8),
+    inset 9px 9px 15px rgba(0, 0, 0, 0.1),
+    inset -9px -9px 15px rgba(255, 255, 255, 1);
+    transition: all .2s ease-out;
+    background-color: #efeeee;
+
+    color: pink;
+    /* font-size: 39px; */
+  }
+  .setNav{
+    font-size: 40px;
+    text-align: center;
+    color: rgb(248, 165, 179);
+
+    line-height: 50px;
+    margin: 0 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    background-color: #efeeee;
+    box-shadow: 9px 9px 15px rgba(0, 0, 0, 0.2),
+                -9px -9px 15px rgba(255, 255, 255, 1);
+    transition: all .2s ease-out;
+    /* background-color: aqua; */
+  }
+  .setNav:hover{
+    cursor: pointer;
+    background-color: #efeeee;
+    /* background-color: aliceblue; */
+    box-shadow: 9px 9px 15px rgba(0, 0, 0, 0.2),
+                -9px -9px 15px rgba(255, 255, 255, 1);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.2),
+    0 0 0 rgba(255, 255, 255, 0.8),
+    inset 9px 9px 15px rgba(0, 0, 0, 0.1),
+    inset -9px -9px 15px rgba(255, 255, 255, 1);
+    transition: all .2s ease-out;
+
+    color: pink;
+    /* font-size: 39px; */
+  }
+  .firstDiv{
+    position: absolute;
+    margin: 50px auto;
+    left: 15vw;
+    width: 70vw;
+    /* height: 500px; */
+    background-color: rgba(254,247,239, 1);
+    border-radius: 20px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    /* background-image: url("/imgs/02.jpg");
+    background-position: center; */
+    /* background-size: contain; */
+  }
+  .ftop{
+    width: 100%;
+    height: 50px;
+    /* background-color: #efeeee; */
+    display: flex;
+    line-height: 50px;
+    font-size: 1.9em;
+    justify-content: space-between;
+  }
+  .ftopleft{
+    margin-top: -35px;
+    margin-left: -25px;
+    width: 100px;
+    height: 100px;
+    background-image: url("imgs/03.png");
+    background-position: -413px 111px;
+    background-size: 540px;
+  }
+  .showbox{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+    /* height: 100px; */
+    /* background-color: #efeeee; */
+  }
+  .showboxlist{
+    width: 300px;
+    height: 500px;
+    /* background-color: aqua; */
+    margin-bottom: 10px;
+    background-image: url("imgs/07.jpg");
+    background-size: cover;
+    background-position: 0 -30px;
+    border-radius: 10px;
+  }
+  .el-tabs--bottom .el-tabs__item.is-bottom:nth-child(2), .el-tabs--bottom .el-tabs__item.is-top:nth-child(2), .el-tabs--top .el-tabs__item.is-bottom:nth-child(2), .el-tabs--top .el-tabs__item.is-top {
+    padding-left: 0;
+    font-size: 1.5em;
+  }
+
+  .shouyeleft{
+    width: 70%;
+    height: 450px;
+    /* background-color: #ccc; */
+  }
+  .text {
+    font-size: 14px;
+  }
+
+  .item {
+    margin-bottom: 5px;
+  }
+
+  .clearfix:before,
+  .clearfix:after {
+    display: table;
+    content: "";
+  }
+  .clearfix:after {
+    clear: both
+  }
+
+  .box-card {
+    width: 200px;
+    height: 200px;
+    overflow-y: scroll;
+  }
+  .shouyeright{
+    width: 30%;
+    height: 400px;
+    /* background-color: #efeeee; */
+  }
+  
+</style>
+<body>
+  <div id="app">
+    <div class="topnav">
+      <div class="mianNav el-icon-menu" @click="firshow()"></div>
+      <div class="chosNav el-icon-s-order" @click="secshow()"></div>
+      <div class="setNav el-icon-s-tools"></div>
+    </div>
+    <div class="mainnav" style="position: relative;">
+      <transition name="el-fade-in-linear">
+        <div v-show="this.visible" class="firstDiv">
+          <div class="ftop">
+            <div class="ftopleft"></div>
+            <div class="ftopmid">今日计划</div>
+            <div class="ftoprig" style="width: 100px;margin-right: -25px;"></div>
+          </div>
+          <hr style="width: 90%;background-color: #ccc;border: 0;height: 2px;">
+          <div class="showbox">
+            <template>
+              <el-tabs v-model="activeName"  style="width: 80%;">
+                <el-tab-pane label="首页" name="first">
+                  <div style="display: flex;">
+                    <div class="shouyeleft" style="display: flex;justify-content: space-around;flex-wrap: wrap;">
+                      <el-card class="box-card">
+                        <div slot="header" class="clearfix">
+                          <span>逻辑</span>
+                        </div>
+                        <div v-for="(item,index) in this.ljList" :key="index" class="text item">
+                          {{'| ' + item.value }}
+                        </div>
+                      </el-card>
+                      <el-card class="box-card">
+                        <div slot="header" class="clearfix">
+                          <span>英语</span>
+                        </div>
+                        <div v-for="(item,index) in this.yyList" :key="index" class="text item">
+                          {{'| ' + item.value }}
+                        </div>
+                      </el-card>
+                      <el-card class="box-card">
+                        <div slot="header" class="clearfix">
+                          <span>作文</span>
+                        </div>
+                        <div v-for="(item,index) in this.zwList" :key="index" class="text item">
+                          {{'| ' + item.value }}
+                        </div>
+                      </el-card>
+                      <el-card class="box-card">
+                        <div slot="header" class="clearfix">
+                          <span>未完成任务</span>
+                        </div>
+                        <div v-for="(item,index) in this.unList" :key="index" class="text item">
+                          {{'| ' + item.value }}
+                        </div>
+                      </el-card>
+                      
+                    </div>
+                    <div class="shouyeright" style="text-align: center;">
+                      <el-progress type="circle" :stroke-width="10" :percentage="this.todayjd/this.todayjdnum*100"></el-progress>
+                      <p>任务进度</p>
+                      <el-progress type="circle" :stroke-width="10" :percentage="100" color="rgb(19,206,102)" :format="()=> this.finishedday"></el-progress>
+                      <p>完成天数</p>
+                    </div>
+                  </div>
+                </el-tab-pane>
+                <el-tab-pane label="逻辑" name="second">
+                  
+                  <el-table
+                  :data="this.ljList"
+                  style="width: 100%;margin-bottom: 20px;">
+                  <el-table-column
+                    label="任务"
+                    min-width="200">
+                    <template slot-scope="scope">
+                      <span style="margin-left: 10px">{{ scope.row.value }}</span>
+                    </template>
+                  </el-table-column>
+                  <el-table-column
+                    label="科目"
+                    width="100">
+                    <template slot-scope="scope">
+                      
+                        <div slot="reference" class="name-wrapper">
+                          <el-tag size="medium">{{ scope.row.name }}</el-tag>
+                        </div>
+                      
+                    </template>
+                  </el-table-column>
+                  <el-table-column label="操作" width="120">
+                    <template slot-scope="scope">
+                      
+                        <el-switch
+                        v-model="scope.row.isfinished"
+                        @change="changeswi(scope.$index,scope.row.isfinished,scope.row.name)"
+                        active-color="#13ce66"
+                        inactive-color="#ff4949">
+                      </el-switch>
+                    </template>
+                  </el-table-column>
+                </el-table>
+    
+                </el-tab-pane>
+                <el-tab-pane label="英语" name="third">
+                  
+                  <el-table
+                  :data="this.yyList"
+                  style="width: 100%;margin-bottom: 20px;">
+                  <el-table-column
+                    label="任务"
+                    min-width="200">
+                    <template slot-scope="scope">
+                      <span style="margin-left: 10px">{{ scope.row.value }}</span>
+                    </template>
+                  </el-table-column>
+                  <el-table-column
+                    label="科目"
+                    width="100">
+                    <template slot-scope="scope">
+                      
+                        <div slot="reference" class="name-wrapper">
+                          <el-tag size="medium">{{ scope.row.name }}</el-tag>
+                        </div>
+                      
+                    </template>
+                  </el-table-column>
+                  <el-table-column label="操作" width="120">
+                    <template slot-scope="scope">
+                      
+                        <el-switch
+                        v-model="scope.row.isfinished"
+                        @change="changeswi(scope.$index,scope.row.isfinished,scope.row.name)"
+                        active-color="#13ce66"
+                        inactive-color="#ff4949">
+                      </el-switch>
+                    </template>
+                  </el-table-column>
+                </el-table>
+    
+                </el-tab-pane>
+                <el-tab-pane label="作文" name="fourth">
+                  <el-table
+                  :data="this.zwList"
+                  style="width: 100%;margin-bottom: 20px;">
+                  <el-table-column
+                    label="任务"
+                    min-width="200">
+                    <template slot-scope="scope">
+                      <span style="margin-left: 10px">{{ scope.row.value }}</span>
+                    </template>
+                  </el-table-column>
+                  <el-table-column
+                    label="科目"
+                    width="100">
+                    <template slot-scope="scope">
+                      
+                        <div slot="reference" class="name-wrapper">
+                          <el-tag size="medium">{{ scope.row.name }}</el-tag>
+                        </div>
+                      
+                    </template>
+                  </el-table-column>
+                  <el-table-column label="操作" width="120">
+                    <template slot-scope="scope">
+                      
+                        <el-switch
+                        v-model="scope.row.isfinished"
+                        @change="changeswi(scope.$index,scope.row.isfinished,scope.row.name)"
+                        active-color="#13ce66"
+                        inactive-color="#ff4949">
+                      </el-switch>
+                    </template>
+                  </el-table-column>
+                </el-table>
+                </el-tab-pane>
+              </el-tabs>
+            </template>
+          </div>
+        
+        </div>
+        </transition>
+    
+        <transition name="el-fade-in-linear">
+          <div v-show="!this.visible" class="firstDiv" style="text-align: center;">
+            <el-date-picker
+              v-model="datevalue"
+              type="date"
+              @change="changedate"
+              value-format="yyyy-MM-dd"
+              placeholder="选择日期">
+            </el-date-picker>
+            <el-table
+                  :data="this.searchList"
+                  style="width: 80%;margin: 20px auto;">
+                  <el-table-column
+                    label="任务"
+                    min-width="200">
+                    <template slot-scope="scope">
+                      <span style="margin-left: 10px">{{ scope.row.value }}</span>
+                    </template>
+                  </el-table-column>
+                  <el-table-column
+                    label="科目"
+                    width="100">
+                    <template slot-scope="scope">
+                      
+                        <div slot="reference" class="name-wrapper">
+                          <el-tag size="medium">{{ scope.row.name }}</el-tag>
+                        </div>
+                      
+                    </template>
+                  </el-table-column>
+                  <el-table-column label="操作" width="120">
+                    <template slot-scope="scope">
+                      
+                        <el-switch
+                        v-model="scope.row.isfinished"
+                        @change="changehisSwi(scope.row)"
+                        active-color="#13ce66"
+                        inactive-color="#ff4949">
+                      </el-switch>
+                    </template>
+                  </el-table-column>
+                </el-table>
+          </div>
+        </transition>
+    </div>
+    
+</div>
 </body>
+  <!-- import Vue before Element -->
+  <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+  <!-- import JavaScript -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    let url="http://124.70.108.229:8080" //http://124.70.108.229:8080/goods/list
+    new Vue({
+      el: '#app',
+      data: function() {
+        return {       
+          visible: true, //今日还是筛选窗口
+          activeName: 'first',
+          datevalue:"",
 
+          ljList:[],
+          yyList:[],
+          zwList:[],
+          unList:[],
+          searchList:[],
+          finishedday:0,
+          finisheddaycc:0,
+          todayjd:0,
+          todayjdnum:0,
+
+          format(percentage){
+            console.log(this);
+            
+            return "完成 "+this.finishedday+" 天"
+          },
+          changedate:(date)=>{
+            console.log(date);
+            axios.get(url+"/schedule/gettheday",{params:{value:date}})
+              .then((res)=>{
+                // console.log(res.data);
+                this.searchList = res.data.data
+              })
+            
+          },
+          changehisSwi:(x)=>{
+            console.log(x);
+            axios.get(url+"/schedule/change",{params:{id:x.id,status:x.isfinished}})
+              .then((res)=>{
+                console.log(res.data);
+                
+              })
+              this.updatejdtotal(x)
+          },
+          changeswi:(i,v,n)=>{
+            // console.log(i,v,n);
+            if(n=="lj"){
+              // console.log("lj");
+              let x = this.ljList[i]
+              // console.log(x);
+              axios.get(url+"/schedule/change",{params:{id:x.id,status:v}})
+              .then((res)=>{
+                console.log(res.data);
+                
+              })
+              this.updatejdtotal(x)
+              
+            }else if(n=="yy"){
+              // console.log("yy");
+              let x = this.yyList[i]
+              axios.get(url+"/schedule/change",{params:{id:x.id,status:v}})
+              .then((res)=>{
+                console.log(res.data);
+                
+              })
+              this.updatejdtotal(x)
+              
+
+            }else if(n == "zw"){
+              // console.log("zw");
+              let x = this.zwList[i]
+              axios.get(url+"/schedule/change",{params:{id:x.id,status:v}})
+              .then((res)=>{
+                console.log(res.data);
+                
+              })
+              this.updatejdtotal(x)
+
+            }
+            
+          },
+          updatejdtotal(x){
+            console.log("updatejdtotal...");
+            let bol = true;
+            this.todayjd = 0;
+            this.ljList.forEach(i=>{
+              if(!i.isfinished){
+                bol = false
+              }else{
+                this.todayjd++
+              }
+            })
+            this.yyList.forEach(j=>{
+              if(!j.isfinished){
+                bol = false
+              }else{
+                this.todayjd++
+              }
+            })
+            this.zwList.forEach(m=>{
+              if(!m.isfinished){
+                bol = false
+              }else{
+                this.todayjd++
+              }
+            })
+            if(bol){
+              this.finishedday++
+            }else{
+              this.finishedday = this.finisheddaycc
+            }
+            let isinunlist = true
+            this.unList.forEach((item,index)=>{
+              // console.log(index);
+              if(item.id == x.id){
+                this.unList.splice(index, 1);
+                isinunlist = false
+              }
+              
+            })
+            if(isinunlist){
+              this.unList.push(x)
+            }
+             
+            
+          },
+          firshow(){
+            this.visible = true
+            // console.log("firshow",this.visible);
+          }, 
+          secshow(){
+            this.visible = false
+            // console.log("secshow",this.visible);
+          },
+          
+         }
+      },
+      mounted:function(){
+        console.log(url);
+        console.log(this.activeName);
+        
+        axios.get(url+"/schedule/gettoday")
+            .then(response => {
+              console.log(response.data);
+              this.searchList = response.data.data
+              if(response.data.code == 1){
+                response.data.data.forEach(element => {
+                  if(element.name == "lj"){
+                    this.ljList.push(element)
+                  }else if(element.name == "yy"){
+                    this.yyList.push(element)
+                  }else{
+                    this.zwList.push(element)
+                  }
+                  if(element.isfinished){
+                    this.todayjd += 1
+                  }
+                });
+                this.todayjdnum = response.data.data.length
+                // console.log(this.todayjd);
+                
+
+              }
+              // console.log(this.ljList);
+              // console.log(this.yyList);
+              // console.log(this.zwList);
+              
+            })
+            .catch(error => {
+              console.error(error);
+            });
+        axios.get(url+"/schedule/getuntask")
+        .then((res)=>{
+          // console.log(res.data);
+          if(res.data.code){
+            res.data.data.forEach(e=>{
+              this.unList.push(e)
+            })
+          }
+          // console.log(this.unList);
+          
+        })
+        axios.get(url+"/schedule/totalday")
+        .then((res)=>{
+          if(res.data.code){
+            console.log(res.data.data);
+            this.finishedday = res.data.data
+            this.finisheddaycc = res.data.data
+          }
+        })
+        
+      }
+    })
+  </script>
 </html>
